@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splashColor"
+    android:orientation="vertical"
+    tools:context=".ui.account.AccountFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/darkGreen"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profileImageAccount"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="160dp"
+                android:layout_marginLeft="160dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="160dp"
+                android:layout_marginRight="160dp"
+                android:contentDescription="@string/profile_image_desc"
+                android:src="@drawable/search"
+                app:civ_border_color="#FF0000"
+                app:civ_shadow_radius="10dp"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/username"
+                android:textColor="#EDEDED"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/email"
+                android:textColor="#F3F3F3"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_logout_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/customborder"
+                android:drawableLeft="@drawable/ic_login"
+                android:gravity="center"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/logout"
+                android:textColor="#EFEBE9"
+                app:backgroundTint="#C32424"
+                app:iconGravity="textStart"
+                tools:ignore="TextContrastCheck" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            android:background="@drawable/grass_bg"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_view_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/customborder"
+                android:fontFamily="@font/cuprum_bold"
+                android:gravity="center"
+                android:text="View Orders"
+                android:textColor="#D3DCE1"
+                android:textSize="16sp"
+                app:backgroundTint="@color/teal_700"
+                app:icon="@drawable/ic_view"
+                app:iconGravity="textStart"
+                app:iconTint="@color/lightWhite" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/customborder"
+                android:fontFamily="@font/cuprum_bold"
+                android:gravity="center"
+                android:text="@string/btn_privacy_policy"
+                android:textColor="#D3DCE1"
+                android:textSize="16sp"
+                app:backgroundTint="@color/teal_700"
+                app:icon="@drawable/ic_privacy"
+                app:iconGravity="textStart"
+                app:iconTint="@color/lightWhite" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_about_us"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/customborder"
+                android:fontFamily="@font/cuprum_bold"
+                android:gravity="center"
+                android:text="@string/about_us"
+                android:textColor="#D3DCE1"
+                android:textSize="16sp"
+                app:backgroundTint="@color/teal_700"
+                app:icon="@drawable/ic_info"
+                app:iconGravity="textStart"
+                app:iconTint="@color/lightWhite" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_share_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/customborder"
+                android:fontFamily="@font/cuprum_bold"
+                android:gravity="center"
+                android:text="@string/share_app"
+                android:textColor="#D3DCE1"
+                android:textSize="16sp"
+                app:backgroundTint="@color/teal_700"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart"
+                app:iconTint="@color/lightWhite" />
+
+
+            <TextView
+                android:id="@+id/app_version_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/cuprum_regular"
+                android:text="@string/version"
+                android:textColor="#E5E3EA"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

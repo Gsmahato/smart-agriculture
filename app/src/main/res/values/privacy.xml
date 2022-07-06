@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string  name="privacy_policy">
+        We at Smart Agriculture, agriculture goods sale and information about
+        agriculture are committed towards protecting privacy of our users regarding the collection,
+        usage and disclosure of the information provided by the users.
+
+        \n\n
+
+        1.	General user information (e.g., email, name, profile picture) will be treated as
+        confidential information and will not be shared with any third parties at any cost,
+        nor will it be used for analysis purpose without prior notification to the user.
+        \n\n
+        2.	You are automatically obliged to the privacy policy of third-party services used in smart agriculture.
+        \n\n
+        3.	Data shown in the Smart Agriculture may not always be 100%
+        accurate to Smart Agriculture will not be held liable for any errors.
+        \n\n
+    </string>
+</resources>

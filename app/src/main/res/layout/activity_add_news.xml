@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".dashboard.news.AddNewsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/abel_regular"
+            android:text="@string/add_agriculture_news"
+            android:textColor="#1E1C1C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/news_title_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/abel_regular"
+            android:hint=" News Title..."
+            android:textColor="#201F1F"
+            android:textColorHint="#806B6B" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            app:boxStrokeColor="#E38080"
+            app:helperText="Choose News source above"
+            app:helperTextTextColor="@color/black"
+            app:hintTextColor="#393535">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/cuprum_bold"
+                android:hint="@string/news_source"
+                android:inputType="none"
+                android:id="@+id/news_source_edit_text"
+                android:shadowColor="#21652C"
+                android:text="@string/ekantipur"
+                android:textColor="@color/black"
+                android:textColorHint="#675555" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <EditText
+            android:id="@+id/news_link_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/abel_regular"
+            android:hint=" News Link..."
+            android:textColor="#201F1F"
+            android:textColorHint="#806B6B" />
+
+        <EditText
+            android:id="@+id/news_date_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/abel_regular"
+            android:hint=" News Date..."
+            android:textColor="#201F1F"
+            android:textColorHint="#806B6B" />
+
+        <EditText
+            android:id="@+id/news_summary_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/abel_regular"
+            android:hint=" News Summary..."
+            android:inputType="textMultiLine|textImeMultiLine"
+            android:textColor="#201F1F"
+            android:textColorHint="#806B6B" />
+
+        <Button
+            android:id="@+id/btn_news_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:drawableLeft="@drawable/ic_add"
+            android:text="ADD NEWS"
+            android:textColor="#FFFEFE" />
+
+    </LinearLayout>
+
+</ScrollView>

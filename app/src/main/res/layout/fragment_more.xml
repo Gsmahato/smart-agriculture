@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightWhite"
+    android:orientation="vertical"
+    tools:context=".ui.more.MoreFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cuprum_bold"
+            android:text="@string/our_services"
+            android:textColor="#191919"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/cuprum_bold"
+            android:text="@string/_1_hyperlink"
+            android:textColor="#191919"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/krishi_news_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_news"
+                android:scaleType="fitXY"
+                android:src="@drawable/news"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <ImageView
+                android:id="@+id/kalimati_veg_market_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_vegmarket"
+                android:scaleType="fitXY"
+                android:src="@drawable/dailyvegmarket"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageView
+                android:id="@+id/weather_info_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:contentDescription="@string/img_weather"
+                android:scaleType="fitStart"
+                android:src="@drawable/weatherinfo"
+                tools:ignore="ImageContrastCheck" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/cuprum_bold"
+            android:text="2. Information"
+            android:textColor="#191919"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/kheti_tarika_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_news"
+                android:scaleType="fitXY"
+                android:src="@drawable/way_to_planting"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <ImageView
+                android:id="@+id/kheti_tarika_btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_vegmarket"
+                android:scaleType="fitXY"
+                android:src="@drawable/way_to_planting"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageView
+                android:id="@+id/kheti_tarika_btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:contentDescription="@string/img_weather"
+                android:scaleType="fitStart"
+                android:src="@drawable/way_to_planting"
+                tools:ignore="ImageContrastCheck" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/cuprum_bold"
+            android:text="@string/_2_register_as_a_farmer"
+            android:textColor="#191919"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/register_as_farmer_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/cuprum_regular"
+            android:text="@string/register_as_farmer_details"
+            android:textColor="#191919"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/img_register_btn"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+
+            android:background="@drawable/customborder"
+            android:contentDescription="@string/image_register_farmer"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/reg_farmer_btn" />
+
+        <com.ldoublem.loadingviewlib.LVCircular
+            android:id="@+id/swipCircle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:onClick="startAnim"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/product_dashboard_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/product_dashboard_image_button" />
+
+    </LinearLayout>
+</ScrollView>

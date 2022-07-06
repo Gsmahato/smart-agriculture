@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".dashboard.info.AddInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/abel_regular"
+            android:text="@string/add_agriculture_information"
+            android:textColor="#1E1C1C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/info_title_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/abel_regular"
+            android:hint="Info Title..."
+            android:textColor="#201F1F"
+            android:textColorHint="#806B6B" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            app:boxStrokeColor="#E38080"
+            app:helperText="Choose any info source above"
+            app:helperTextTextColor="@color/black"
+            app:hintTextColor="#393535"
+            android:layout_marginStart="10dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/info_type_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/cuprum_bold"
+                android:hint="Info Type"
+                android:inputType="none"
+                android:text="तरकारी खेती"
+                android:shadowColor="#21652C"
+                android:textColor="@color/black"
+                android:textColorHint="#433737" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btn_choose_img_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="UPLOAD IMAGE"
+            android:textColor="@color/white"
+            app:backgroundTint="#5C5757" />
+
+        <ImageView
+            android:id="@+id/img_info_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/ic_image"
+            android:contentDescription="@string/image_description" />
+        <EditText
+            android:id="@+id/info_details_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/abel_regular"
+            android:hint="Info Details..."
+            android:inputType="textMultiLine|textImeMultiLine"
+            android:textColor="#201F1F"
+            android:textColorHint="#806B6B" />
+
+        <Button
+            android:id="@+id/btn_add_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/customborder"
+            android:drawableLeft="@drawable/ic_add"
+            android:text="SAVE INFO"
+            android:textColor="#EFEFEF" />
+
+
+    </LinearLayout>
+
+</ScrollView>

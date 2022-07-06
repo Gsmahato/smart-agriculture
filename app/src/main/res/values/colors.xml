@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="splashColor2">#4fb424</color>
+    <color name="splashColor">#008037</color>
+    <color name="splashColor3">#375623</color>
+    <color name="googleLogoColor">#E3E5E8</color>
+    <color name="facebookLogoColor">#1877f2</color>
+    <color name="colorAccount">#9C9B71</color>
+    <color name="darkGreen">#148033</color>
+    <color name="lightWhite">#EFE7E7</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="light_white_back">#ecf0f3</color>
+    <color name="dark_grey">#545454</color>
+    <color name="light_white2">#fffdf6</color>
+    <color name="help_button">#d9ba3a</color>
+    <color name="lightWhite3">#f4f4f4</color>
+    <color name="dark_blue">#1E2E57</color>
+</resources>

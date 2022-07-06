@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_white_back"
+    android:backgroundTint="@color/light_white_back"
+    tools:context=".LoginActivity"
+    tools:ignore="SpeakableTextPresentCheck">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profileImageAccount"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/profile_image_desc"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/image_login_back"
+                app:civ_border_color="#DCDCDC"
+                app:civ_border_width="10dp"
+                app:civ_shadow_radius="20dp"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="SMART AGRICULTURE !"
+                android:textColor="@color/dark_grey"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:text="SIGN-IN TO CONTINUE"
+                android:textColor="@color/dark_grey"
+                android:textSize="17sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_google"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="#f8f8f8"
+                android:drawableLeft="@drawable/googleg_standard_color_18"
+                android:fontFamily="@font/poppins_light"
+                android:text="LOGIN WITH GOOGLE"
+                android:textColor="@color/dark_grey"
+                android:textSize="17sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_fb"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:drawableLeft="@drawable/com_facebook_button_icon"
+                android:fontFamily="@font/poppins_light"
+                android:text="LOGIN WITH FACEBOOK"
+                android:textColor="@color/lightWhite"
+                android:textSize="17sp"
+                app:backgroundTint="@color/light_blue_900" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/customborder"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="LOGIN"
+                android:textColor="@color/dark_grey"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/btn_skip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="100dp"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:text="SKIP "
+                android:textColor="@color/dark_grey"
+                android:textSize="17sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

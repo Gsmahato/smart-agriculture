@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hanuman.smartagriculture">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SmartAgriculture"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".services.kheti.KhetiDetails"
+            android:exported="false"
+            android:parentActivityName=".services.kheti.KhetiDashboard"
+            />
+        <activity
+            android:name=".services.kheti.KhetiDashboard"
+            android:exported="false"
+            android:label="व्यवसायिक खेती"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".descriptions.help.HelpActivity"
+            android:exported="false"
+            android:label="USER HELP GUIDELINES"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".services.order.OrderDashboard"
+            android:exported="false"
+            android:label="Order Dashboard"
+            android:parentActivityName=".services.products.ProductDashboard" />
+        <activity
+            android:name=".services.news.NewsDetailsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".services.order.OrderList"
+            android:label="Your Orders List"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".services.products.ProductDetailsActivity"
+            android:label="Product Description"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".services.register.FarmerRegisterActivity"
+            android:label="@string/reg_farmer"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".hyperlink.WeatherInformationActivity"
+            android:label="Weather Information"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".services.products.ProductDashboard"
+            android:label="Product Dashboard"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".dashboard.info.ViewInfoActivity"
+            android:label="View Info"
+            android:parentActivityName=".dashboard.DashboardActivity" />
+        <activity
+            android:name=".dashboard.info.AddInfoActivity"
+            android:label="Add Info"
+            android:parentActivityName=".dashboard.DashboardActivity" />
+        <activity
+            android:name=".dashboard.news.ViewNewsActivity"
+            android:label="View News"
+            android:parentActivityName=".dashboard.DashboardActivity" />
+        <activity
+            android:name=".dashboard.news.AddNewsActivity"
+            android:label="Add News"
+            android:parentActivityName=".dashboard.DashboardActivity" />
+        <activity android:name=".dashboard.DashboardActivity" />
+        <activity
+            android:name=".services.news.NewsActivity"
+            android:label="Agriculture News"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".hyperlink.DailyVegMarketActivity"
+            android:label="Daily Vegetable Market"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".descriptions.AboutActivity"
+            android:label="About Us"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".descriptions.PrivacyPolicyActivity"
+            android:label="Privacy Policy"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.SmartAgriculture.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SmartAgriculture.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+    </application>
+
+</manifest>

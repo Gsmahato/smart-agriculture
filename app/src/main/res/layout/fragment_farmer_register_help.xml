@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".descriptions.help.FarmerRegisterHelpFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FARMER REGISTER HELP"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/cuprum_bold"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/farmerRegHelp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="start"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/cuprum_regular"
+        android:layout_marginTop="10dp"
+        android:lineSpacingMultiplier="1"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/help5"/>
+    <Button
+        android:id="@+id/more_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/customborder"
+        android:drawableEnd="@drawable/ic_agro"
+        android:drawableRight="@drawable/ic_agro"
+        android:textColor="@color/white"
+        android:text="@string/more_options"
+        android:fontFamily="@font/cuprum_bold"
+        app:backgroundTint="@color/help_button"
+        />
+</LinearLayout>

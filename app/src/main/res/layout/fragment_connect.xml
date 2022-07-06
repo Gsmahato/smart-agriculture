@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightWhite"
+    android:orientation="vertical"
+    tools:context=".ui.connect.ConnectFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cuprum_bold"
+            android:text="CONNECT US DIRECTLY FROM HERE "
+            android:textColor="#090909"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/write_msg_details_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/customborder"
+            android:ems="10"
+            android:fontFamily="@font/abel_regular"
+            android:gravity="start"
+            android:hint="Write your thought to us..."
+            android:inputType="textMultiLine|textPersonName|textImeMultiLine"
+            android:textColor="#090909"
+            android:textColorHint="#4E4444" />
+
+        <Button
+            android:id="@+id/msg_sent_btn_connect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/customborder"
+            android:fontFamily="@font/cuprum_bold"
+            android:text="SEND"
+            android:textColor="#EDEBEB"
+            android:textSize="16sp"
+            app:backgroundTint="#5E4545" />
+
+    </LinearLayout>
+</ScrollView>

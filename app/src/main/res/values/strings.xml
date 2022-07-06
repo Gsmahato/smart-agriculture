@@ -1,0 +1,162 @@
+<resources>
+    <string name="app_name">Smart Agriculture</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_connect">Connect</string>
+    <string name="title_more">More</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_account">Account</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_agro_news">Agro News</string>
+    <string name="nav_daily_vegetable_market">Daily Veg Market</string>
+    <string name="nav_about_us">About us</string>
+    <string name="nav_share_app">Share app</string>
+    <string name="nav_login">Login</string>
+    <string name="nav_logout">Logout</string>
+    <string name="start">Start</string>
+    <string name="close">Close</string>
+    <string name="client_id">846114115500-pedgrovl091ci92ai451j96g9vvrafma.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">210573751098791</string>
+    <string name="fb_login_protocol_scheme">fb210573751098791</string>
+    <string name="profile_image_desc">profile image</string>
+    <string name="username">username</string>
+    <string name="email">email</string>
+    <string name="logout">Logout</string>
+    <string name="btn_privacy_policy">Privacy Policy</string>
+    <string name="about_us">ABOUT US</string>
+    <string name="share_app">SHARE APP</string>
+    <string name="text_contact_us">Contact Us:</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="login_click">Click here to login Smart Agriculture</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="dashboard_desc">
+        तपाईले यस ड्यासबोर्डमा धेरै अपरेशनहरू गर्न सक्नुहुन्छ जसमा कृषि समाचारहरू थप्ने,
+        कृषिको बारेमा जानकारी, र धेरै कुराहरू गर्न सक्नुहुन्छ
+    </string>
+    <string name="operations_dashboard_desc">You can click on the specific image button to perform operations.</string>
+    <string name="add_news">ADD NEWS</string>
+    <string name="update_news">UPDATE NEWS</string>
+    <string name="add_info">ADD INFO</string>
+    <string name="update_info">UPDATE INFO</string>
+    <string name="change_image">CHANGE IMAGE</string>
+    <string name="action_edit">EDIT</string>
+    <string name="action_remove">DELETE</string>
+    <string name="add_agriculture_news">Add AgrIculture News :</string>
+    <string name="add_agriculture_information">Add Agriculture Information</string>
+    <string name="ekantipur">ekantipur</string>
+    <string name="news_source">News Source</string>
+    <string-array name="source_list">
+        <item>ekantipur</item>
+        <item>krishi post</item>
+        <item>kisan aawaj</item>
+    </string-array>
+    <string-array name="info_type">
+        <item>तरकारी खेती</item>
+        <item>फलफुल खेती</item>
+        <item>जडिबुटी खेती</item>
+    </string-array>
+    <string name="register_as_farmer_details">
+        If You are farmer and your want to sell the product then you can register as a farmer.
+        If you register as a farmer then you have many features available which are as below:\n\n
+
+        1. You can unlock message us directly feature and contact us via app.\n
+        2. You can post your product details like product images, product description, product price per unit etc.\n
+        3. You can sell via app using Sell your product option which is appear on "more" page after registration as farmer.\n\n
+
+        CLICK ON THE IMAGE BELOW TO REGISTER AS A FARMER
+    </string>
+    <string name="register_as_farmer_details_nepali">
+        यदि तपाइँ किसान हुनुहुन्छ र तपाइँ उत्पादन बेच्न चाहनुहुन्छ भने तपाइँ किसानको रूपमा दर्ता गर्न सक्नुहुन्छ। \n
+यदि तपाइँ किसानको रूपमा दर्ता गर्नुहुन्छ भने तपाइँसँग धेरै सुविधाहरू उपलब्ध छन् जुन निम्न छन्:\n\n
+
+        1. तपाईंले सन्देश हामीलाई सीधा मेसेज गर्न सक्नुहुन्छ र एप मार्फत हामीलाई सम्पर्क गर्न सक्नुहुन्छ।\n
+        2. तपाईं आफ्नो उत्पादन विवरणहरू पोस्ट गर्न सक्नुहुन्छ जस्तै उत्पादन फोटो, उत्पादन विवरण, उत्पादन मूल्य प्रति एकाइ आदि। \n
+        3. तपाइले एप को तल रहेको मोर भन्ने अप्सन प्रयोग गरेर किसान मा दर्ता गर्न सक्नुहुन्छ \n\n
+
+        CLICK ON THE IMAGE BELOW TO REGISTER AS A FARMER
+    </string>
+    <string name="_2_user_messages">2. User Messages :</string>
+    <string name="jilla">जिल्ला *</string>
+    <string name="gaupalika_text">नगरपालिका/गाँउपालिका *</string>
+    <string name="mb_text">मोबाईल नम्बर *</string>
+    <string name="reg_text">Register as a Farmer (कृषकको लागी दर्ता गर्नुहोस )</string>
+    <string name="reg_farmer">Register Farmer(कृषकको दर्ता)</string>
+    <string name="version">Version</string>
+    <string name="our_services">Our Services :</string>
+    <string name="_1_hyperlink">1. Hyperlink</string>
+    <string name="_2_register_as_a_farmer">3. Register as a Farmer</string>
+    <string name="image_news">image news</string>
+    <string name="image_vegmarket">image_vegMarket</string>
+    <string name="img_weather">img_weather</string>
+    <string name="image_register_farmer">image_register_farmer</string>
+    <string name="product_title">Product Title...</string>
+    <string name="product_price">Product Price</string>
+    <string name="add_product">ADD PRODUCT</string>
+    <string name="update_product">UPDATE PRODUCT</string>
+    <string name="del_or_ed">Edit or Delete product</string>
+    <string name="product_image">PRODUCT IMAGE</string>
+    <string name="image_description">Image Description</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="stock_name">अर्डर गर्दा कुल स्टक भन्दा कम अर्डर गर्नुहोला । जुन एकाइ मा कुल स्टक रखिएको छ त्यही एकाइ मा आफुलाई चहिने अर्डर राख्नुहोला । </string>
+    <string name="total_stock">Total Stock : </string>
+    <string name="your_orders">Your stock :</string>
+    <string name="edit_your_orders">How much/many you want to get(unit)</string>
+    <string name="send_req">SEND ORDER REQUEST</string>
+    <string name="dialog_message_order">Are you sure you want to delete this order? This process cannot be undone.</string>
+    <string name="otp_confirmation_dialog">OTP CONFIRMATION DIALOG</string>
+    <string name="register_as_farmer">VERIFY AND REGISTER AS FARMER</string>
+    <string name="enter_otp">ENTER OTP</string>
+    <string name="desc_reg_farmer">Kindly login through Facebook or Google to authenticate first for registering as a Farmer !</string>
+    <string name="theme_app">स्मार्ट कृषि स्मार्ट किसान</string>
+    <string name="theme_home">अब कृषि सामाग्री मगाउनु होस सिधै कृषक बाट</string>
+    <string name="more_options">More Options</string>
+    <string name="help">Help</string>
+    <string name="farmer_help">After transferring Normal users to farmer users, they get many more features: \n
+        1. Farmer user can post their product regarding agriculture. \n
+        2. Farmer use can see their posted product inside product dashboard. \n
+        3. They can edit/update and delete their posted product inside the product dashboard. \n
+        4. They can see their profile inside the product dashboard and edit their profile. \n
+        5. They can see their total sales, total orders, total completed orders, and total pending orders below their profile. \n
+        6. They can see the order dashboard button below to their details. \n
+        7. After clicking on the order dashboard, the farmer can see their pending and completed orders in the list and their pages.\n
+    </string>
+
+    <string name="farmerRegHelp">For farmer registration, there is an option inside more option in Bottom navigation.\n
+        You can see the Image Button register as farmer.\n
+        after clicking on the image button, you can see that there is a form field to register as a farmer.\n
+        It needs :
+        1. Province \n
+        2.  District \n
+        3. Municipality|subMunicipality \n
+        4. Mobile Number \n
+        After clicking on the Register as farmer button, the user can see the dialog and it needs OTP to verify your mobile number,\n
+        after entering OTP which is 6 digit pin, users mobile number is successfully verified and now farmer user have more features compared to a normal user.\n
+    </string>
+    <string name="order_help">For ordering the product posted by a normal user,\n
+    1. First you can go to the product details of any product.\n
+    2. On the product details page, you can see the ORDER AND REQUEST button.\n
+    3. After clicking on that order and request button, a dialog box is appeared.\n
+    4. There is edit Text in the dialog, you have to enter stock less than the stock posted by the farmer and in the exact unit posted by the farmer.\n
+    5. After entering the correct stock you need, you can press the send image button and your order is requested. \n
+    </string>
+    <string name="user_help">Normal users or buyers can easily install smart agriculture apps from Google Play Store.\n
+        After Installing,
+he/she can see the product on the home screen posted by the farmer. He/she can click on the product for product details.\n
+* Normal users can easily, send an order request directly to the farmer.\n
+* There is more option in the bottom navigation, you can see many more features there,\n
+You can read the news regarding agriculture by clicking agriculture news posted by admin users,\n
+You can view weather information which helps both farmers and normal users.\n
+You can view market information that shows market values (eg. Kalimati) for vegetable stuff.\n
+You can see the many information regarding seeds and plants in the information section.\n
+/n/n
+Note: Normal users can easily transfer to Farmer users anytime they want.\n
+    </string>
+    <string name="user_reg_help">For registering as a normal user, you can see the login button in the menu drawable or from the account option in Bottom Navigation.\n
+        There is an option to log in: \n
+        1. You can login via Your Google account or Your Facebook Account.\n
+        2. After login, You have to feature like requesting an order inside the product description\n
+    </string>
+</resources>

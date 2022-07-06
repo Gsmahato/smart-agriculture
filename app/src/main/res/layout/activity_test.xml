@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".services.register.TestActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:textColorHint="#332D2D"
+        app:boxStrokeColor="#E38080"
+        app:helperText="Choose Your Province"
+        app:helperTextTextColor="@color/black"
+        app:hintTextColor="#393535">
+
+        <AutoCompleteTextView
+            android:id="@+id/test_province"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/cuprum_bold"
+            android:hint="Select Province"
+            android:inputType="none"
+            android:shadowColor="#21652C"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="#675555"
+            tools:ignore="TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:textColorHint="#332D2D"
+        app:boxStrokeColor="#E38080"
+        app:helperText="Choose Your District"
+        app:helperTextTextColor="@color/black"
+        app:hintTextColor="#393535">
+
+        <AutoCompleteTextView
+            android:id="@+id/test_district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/cuprum_bold"
+            android:hint="Select District"
+            android:inputType="none"
+            android:minHeight="48dp"
+            android:shadowColor="#21652C"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="#675555" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:textColorHint="#332D2D"
+        app:boxStrokeColor="#E38080"
+        app:helperText="Choose Your Municipality"
+        app:helperTextTextColor="@color/black"
+        app:hintTextColor="#393535">
+
+        <AutoCompleteTextView
+            android:id="@+id/test_mun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/cuprum_bold"
+            android:hint="Select Municipality"
+            android:inputType="none"
+            android:shadowColor="#21652C"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="#675555" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

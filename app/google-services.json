@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "846114115500",
+    "project_id": "smart-agriculture-f017a",
+    "storage_bucket": "smart-agriculture-f017a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846114115500:android:af91927aca28c010de7409",
+        "android_client_info": {
+          "package_name": "com.hanuman.smartagriculture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846114115500-fbhiiscfpscmqcit4j4pm4tmfb2epimu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hanuman.smartagriculture",
+            "certificate_hash": "39eb61945bb9174cd9f6d3508fc216fb83dc0984"
+          }
+        },
+        {
+          "client_id": "846114115500-pedgrovl091ci92ai451j96g9vvrafma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE8J7IXFIv-Yc9LEQfCjVYIItaq41v5PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846114115500-pedgrovl091ci92ai451j96g9vvrafma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

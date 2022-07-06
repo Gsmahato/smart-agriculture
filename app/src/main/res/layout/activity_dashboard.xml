@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".dashboard.DashboardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/cuprum_bold"
+                android:text="Dashboard :"
+                android:textColor="#070404"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/dahboard" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/cuprum_bold"
+                android:text="@string/dashboard_desc"
+                android:textColor="#2B2929"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="#977878" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/cuprum_bold"
+                android:text="Operations :"
+                android:textColor="#130C0C"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/cuprum_bold"
+                android:text="@string/operations_dashboard_desc"
+                android:textColor="#130C0C"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/cuprum_bold"
+                android:text="1. News :"
+                android:textColor="#130C0C"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/img_add_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/add_news_logo" />
+
+                <ImageView
+                    android:id="@+id/img_view_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/view_news_logo" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/cuprum_bold"
+                android:text="2. Information :"
+                android:textColor="#130C0C"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/img_add_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/add_agro_info" />
+
+                <ImageView
+                    android:id="@+id/img_view_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/view_agro_info" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
