@@ -1,19 +1,34 @@
 package com.hanuman.smartagriculture.services.products;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +47,14 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.hanuman.smartagriculture.databinding.FragmentAddProductBinding;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
 import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -43,10 +65,13 @@ public class AddProductFragment extends Fragment {
     private DatabaseReference mDatabaseReference;
     private StorageReference mStorageReference;
     public static final int PICK_IMAGE_REQUEST =1;
+    public static final int CAMERA_CAPTURE =2;
+    final int CROP_PIC = 3;
     private Uri mImageUri;
     private ProgressDialog progressDialog;
     private CrudProduct crud;
     private Bundle bundle;
+    String currentPhotoPath;
     private FirebaseDatabase database;
 
     @Override
@@ -64,6 +89,33 @@ public class AddProductFragment extends Fragment {
         //progress dialog codes
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Please Wait");
+
+        //take photo button
+        binding.productCameraChooseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                mImageUri = Uri.fromFile(new File(Environment
+//                        .getExternalStorageDirectory(), "tmp_avatar_"
+//                        + String.valueOf(System.currentTimeMillis())
+//                        + ".jpg"));
+                mImageUri = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", new File(Environment
+                        .getExternalStorageDirectory(), "tmp_avatar_"
+                        + String.valueOf(System.currentTimeMillis())
+                        + ".jpg"));
+
+                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
+                        mImageUri);
+
+                try {
+                    intent.putExtra("return-data", true);
+
+                    startActivityForResult(intent, CAMERA_CAPTURE);
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         //get data for edit or update
         Product product_edit= (Product) getActivity().getIntent().getSerializableExtra("EDIT");
@@ -130,9 +182,143 @@ public class AddProductFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!=null && data.getData()!=null){
             mImageUri = data.getData();
+
             Glide.with(this).load(mImageUri).into(binding.productImgShow);
         }
+        else if(requestCode==CAMERA_CAPTURE && resultCode == RESULT_OK && data!=null && data.getData()!=null){
+            doCrop();
+        }
+        else if(requestCode==CROP_PIC && resultCode == RESULT_OK && data!=null && data.getData()!=null){
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                Bitmap photo = extras.getParcelable("data");
+
+                binding.productImgShow.setImageBitmap(photo);
+            }
+            File f = new File(mImageUri.getPath());
+            if (f.exists())
+                f.delete();
+
+        }
+
     }
+
+    private void doCrop() {
+        final ArrayList<CropOption> cropOptions = new ArrayList<CropOption>();
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setType("image/*");
+
+        List<ResolveInfo> list = getActivity().getPackageManager().queryIntentActivities(
+                intent, 0);
+
+        int size = list.size();
+        if (size == 0) {
+
+            Toast.makeText(getContext(), "Can not find image crop app",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        } else {
+            intent.setData(mImageUri);
+
+            intent.putExtra("outputX", 200);
+            intent.putExtra("outputY", 200);
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("scale", true);
+            intent.putExtra("return-data", true);
+
+            if (size == 1) {
+                Intent i = new Intent(intent);
+                ResolveInfo res = list.get(0);
+
+                i.setComponent(new ComponentName(res.activityInfo.packageName,
+                        res.activityInfo.name));
+
+                startActivityForResult(i, CAMERA_CAPTURE);
+            } else {
+                for (ResolveInfo res : list) {
+                    final CropOption co = new CropOption();
+
+                    co.title = getActivity().getPackageManager().getApplicationLabel(
+                            res.activityInfo.applicationInfo);
+                    co.icon = getActivity().getPackageManager().getApplicationIcon(
+                            res.activityInfo.applicationInfo);
+                    co.appIntent = new Intent(intent);
+
+                    co.appIntent
+                            .setComponent(new ComponentName(
+                                    res.activityInfo.packageName,
+                                    res.activityInfo.name));
+
+                    cropOptions.add(co);
+                }
+
+                CropOptionAdapter adapter = new CropOptionAdapter(
+                        getApplicationContext(), cropOptions);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Choose Crop App");
+                builder.setAdapter(adapter,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int item) {
+                                startActivityForResult(
+                                        cropOptions.get(item).appIntent,
+                                        CROP_PIC);
+                            }
+                        });
+
+                builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+
+                        if (mImageUri != null) {
+                            getActivity().getContentResolver().delete(mImageUri, null,
+                                    null);
+                            mImageUri = null;
+                        }
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+
+                alert.show();
+            }
+        }
+    }
+
+    public class CropOptionAdapter extends ArrayAdapter<CropOption> {
+        private ArrayList<CropOption> mOptions;
+        private LayoutInflater mInflater;
+
+        public CropOptionAdapter(Context context, ArrayList<CropOption> options) {
+            super(context, R.layout.crop_selector, options);
+
+            mOptions = options;
+
+            mInflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup group) {
+            if (convertView == null)
+                convertView = mInflater.inflate(R.layout.crop_selector, null);
+
+            CropOption item = mOptions.get(position);
+
+            if (item != null) {
+                ((ImageView) convertView.findViewById(R.id.iv_icon))
+                        .setImageDrawable(item.icon);
+                ((TextView) convertView.findViewById(R.id.tv_name))
+                        .setText(item.title);
+
+                return convertView;
+            }
+
+            return null;
+        }
+    }
+
 
     public void uploadProduct() {
         progressDialog.show();
@@ -212,5 +398,12 @@ public class AddProductFragment extends Fragment {
         }
     }
 
+    public class CropOption {
+        public CharSequence title;
+        public Drawable icon;
+        public Intent appIntent;
+    }
+
 
 }
+

@@ -104,26 +104,46 @@
             android:textColorHint="@color/black"
             android:textEditSuggestionItemLayout="@color/white" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/product_img_choose_btn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/customborder"
-            android:outlineAmbientShadowColor="@color/darkGreen"
-            android:text="CHOOSE IMAGE"
-            android:textColor="@color/white" />
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/product_img_choose_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.4"
+                android:background="@drawable/customborder"
+                android:outlineAmbientShadowColor="@color/darkGreen"
+                android:text="CHOOSE IMAGE"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/product_camera_choose_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.4"
+                android:background="@drawable/customborder"
+                android:drawableRight="@drawable/ic_camera"
+                android:text="Take Photo"
+                android:textColor="#F4F4F4" />
+
+        </LinearLayout>
 
         <ImageView
-        android:id="@+id/product_img_show"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/ic_image"
-        />
+            android:id="@+id/product_img_show"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_image" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/product_desc_layout"

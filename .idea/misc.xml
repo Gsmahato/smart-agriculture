@@ -70,6 +70,7 @@
         <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/customborder2.xml" value="0.262" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_account.xml" value="0.259" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_add.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_camera.xml" value="0.262" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_close.xml" value="0.259" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_connect.xml" value="0.259" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_contact.xml" value="0.259" />
@@ -97,6 +98,7 @@
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_view_info.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_view_news.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_weather_information.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/crop_selector.xml" value="0.24010416666666667" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/dialog_confirmation.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/dialog_mobile_verify.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/dialog_stock.xml" value="0.25677083333333334" />
@@ -122,6 +124,7 @@
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_product.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_product_details.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/navigation_layout_drawer.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/provider_paths.xml" value="0.197008547008547" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/admin_signout.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/disclaimer.xml" value="0.25677083333333334" />
@@ -130,6 +133,7 @@
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/navigation_drawer.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/task.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.261" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/xml/provider_paths.xml" value="0.24010416666666667" />
       </map>
     </option>
   </component>
