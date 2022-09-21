@@ -139,7 +139,11 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Product product1 = data.getValue(Product.class);
                     product1.setKey(data.getKey());
-                    product.add(product1);
+                    String[] product_stock_array =  product1.getProductStock().split(" ");
+                    int product_stock = Integer.parseInt(product_stock_array[0]);
+                    if(product_stock>0) {
+                        product.add(product1);
+                    }
                     key = data.getKey();
                 }
                 adapter.setItem(product);
@@ -181,6 +185,7 @@ public class HomeFragment extends Fragment {
             intent.putExtra("SellerEmail", product.getSellerEmail());
             intent.putExtra("SellerMobile", product.getSellerMobile());
             intent.putExtra("TotalProductStock", product.getProductStock());
+            intent.putExtra("ProductKey", product.getKey());
             getContext().startActivity(intent);
         };
     }

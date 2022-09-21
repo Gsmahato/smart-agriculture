@@ -163,7 +163,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/customborder"
-                android:text="Verify Mobile Number"
+                android:text="मोबाईल नम्बर पुष्टि  गर्नुहोस्"
                 android:textColor="#F5F5F5"
                 app:backgroundTint="@color/darkGreen" />
 

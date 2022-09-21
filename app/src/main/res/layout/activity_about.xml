@@ -134,7 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="gsmahato8@gmail.com"
+                        android:text="smartagriculture@gmail.com"
                         android:textColor="#0B0B0B"
                         android:textSize="16sp" />
                 </LinearLayout>

@@ -65,21 +65,71 @@
         <entry key="..\:/PRINT 2/Smart-Agriculture/app/src/main/res/layout/activity_help.xml" value="0.18645833333333334" />
         <entry key="..\:/PRINT 2/Smart-Agriculture/app/src/main/res/layout/fragment_farmer_register_help.xml" value="0.18645833333333334" />
         <entry key="..\:/PRINT 2/Smart-Agriculture/app/src/main/res/menu/help_menu.xml" value="0.18645833333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable-xhdpi/ic_agro.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/customborder.xml" value="0.262" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/customborder2.xml" value="0.262" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_account.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_add.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_close.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_connect.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_contact.xml" value="0.259" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/drawable/ic_share.xml" value="0.259" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_about.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_add_info.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_add_news.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_daily_veg_market.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_dashboard.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_farmer_register.xml" value="0.25" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_help.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_kheti_dashboard.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_kheti_details.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_login.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_main.xml" value="0.234375" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_news.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_news_details.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_order_dashboard.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_order_list.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_privacy_policy.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_product_dashboard.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_product_details.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_test.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_view_info.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_view_news.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/activity_weather_information.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/dialog_confirmation.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/dialog_mobile_verify.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/dialog_stock.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/drawer_header.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_add_product.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_all_news.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_completed_order.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_completed_orders_list.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_connect.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_ekantipur.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_farmer_help.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_farmer_profile.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_user_login_help.xml" value="0.264" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/fragment_view_product.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_connect.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_dropdown.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_farmer_profile.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_info.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_kheti.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_order.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_product.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/item_product_details.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/layout/navigation_layout_drawer.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/admin_signout.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/disclaimer.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/filter.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/help_menu.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/navigation_drawer.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/task.xml" value="0.25677083333333334" />
+        <entry key="..\:/Smart-Agriculture/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.261" />
       </map>
     </option>
   </component>
