@@ -1,29 +1,27 @@
 package com.hanuman.smartagriculture.services.products;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.hanuman.smartagriculture.LoginActivity;
 import com.hanuman.smartagriculture.R;
 import com.hanuman.smartagriculture.Utilities;
+import com.hanuman.smartagriculture.databinding.ActivityProductDetailsBinding;
 import com.hanuman.smartagriculture.models.Order;
 import com.hanuman.smartagriculture.services.order.CrudOrder;
-
-import com.hanuman.smartagriculture.databinding.ActivityProductDetailsBinding;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +37,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     Order order;
     Dialog dialog;
     CrudProduct crudProduct;
+    double doubleLatitude;
+    double doubleLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +59,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         binding.mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProductDetailsActivity.this, MapsActivity.class);
-                startActivity(intent);
+                Uri gmmIntentUri = Uri.parse("geo:"+latitude+","+longitude+"?="+Uri.parse(latitude+","+longitude));
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+                Toasty.success(ProductDetailsActivity.this, "Going to Google Map", Toasty.LENGTH_SHORT, true).show();
             }
         });
 
@@ -154,8 +159,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             latitude = getIntent().getStringExtra("Latitude");
             longitude = getIntent().getStringExtra("Longitude");
 
-            double doubleLatitude = Double.parseDouble(latitude);
-            double doubleLongitude = Double.parseDouble(longitude);
+             doubleLatitude = Double.parseDouble(latitude);
+             doubleLongitude = Double.parseDouble(longitude);
 
             Geocoder geocoder = new Geocoder(ProductDetailsActivity.this, Locale.getDefault());
             List<Address> addresses = null;
