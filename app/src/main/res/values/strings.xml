@@ -159,4 +159,5 @@ Note: Normal users can easily transfer to Farmer users anytime they want.\n
         1. You can login via Your Google account or Your Facebook Account.\n
         2. After login, You have to feature like requesting an order inside the product description\n
     </string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

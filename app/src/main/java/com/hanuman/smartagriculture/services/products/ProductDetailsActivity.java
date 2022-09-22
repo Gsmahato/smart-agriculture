@@ -3,15 +3,20 @@ package com.hanuman.smartagriculture.services.products;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.hanuman.smartagriculture.LoginActivity;
 import com.hanuman.smartagriculture.R;
 import com.hanuman.smartagriculture.Utilities;
 import com.hanuman.smartagriculture.models.Order;
@@ -19,13 +24,16 @@ import com.hanuman.smartagriculture.services.order.CrudOrder;
 
 import com.hanuman.smartagriculture.databinding.ActivityProductDetailsBinding;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     ActivityProductDetailsBinding binding;
-    String title, sellerProfile,sellerMobile,sellerEmail, price, description, image,totalProductStock, productKey;
+    String title, sellerProfile,sellerMobile,sellerEmail, price, description, image,totalProductStock, productKey, latitude, longitude;
     CrudOrder crud;
     private FirebaseAuth auth;
     Order order;
@@ -48,6 +56,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         dialog = new Dialog(this);
 
+        binding.mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductDetailsActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+//request an order
         if(auth.getCurrentUser()!=null) {
             binding.orderByButton.setOnClickListener(view -> {
                 dialog.setContentView(R.layout.dialog_stock);
@@ -120,6 +138,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 && getIntent().hasExtra("ProductPriceText")
                 && getIntent().hasExtra("ProductImage") && getIntent().hasExtra("ProductDescText")
                 && getIntent().hasExtra("ProductKey")
+                && getIntent().hasExtra("Latitude")
+                && getIntent().hasExtra("Longitude")
         ) {
             //Getting Data from Intent
             title = getIntent().getStringExtra("TitleProductText");
@@ -131,6 +151,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
             sellerMobile=getIntent().getStringExtra("SellerMobile");
             totalProductStock = getIntent().getStringExtra("TotalProductStock");
             productKey =  getIntent().getStringExtra("ProductKey");
+            latitude = getIntent().getStringExtra("Latitude");
+            longitude = getIntent().getStringExtra("Longitude");
+
+            double doubleLatitude = Double.parseDouble(latitude);
+            double doubleLongitude = Double.parseDouble(longitude);
+
+            Geocoder geocoder = new Geocoder(ProductDetailsActivity.this, Locale.getDefault());
+            List<Address> addresses = null;
+
+            try {
+                addresses = geocoder.getFromLocation(doubleLatitude,doubleLongitude,1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String address = addresses.get(0).getAddressLine(0);
+            binding.sellerLocationTextView.setText(address);
+
 
             //Setting Intent Data
             binding.productTitleDetails.setText(title);

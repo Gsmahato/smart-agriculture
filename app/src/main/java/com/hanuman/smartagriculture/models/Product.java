@@ -10,11 +10,11 @@ public class Product implements Serializable {
      private String key;
     private Date productDate;
     private String userId, productTitle, productImage, productPrice, productStock, productDescription;
-    private String sellerProfile,sellerEmail,sellerMobile;
+    private String sellerProfile,sellerEmail,sellerMobile,sellerLatitude, sellerLongitude;
 
     public Product( String userId, String productTitle, String productImage, String productPrice, String productStock
             , String productDescription,
-                   String sellerProfile, String sellerEmail, String sellerMobile) {
+                   String sellerProfile, String sellerEmail, String sellerMobile, String sellerLatitude, String sellerLongitude) {
         this.userId = userId;
         this.productTitle = productTitle;
         this.productImage = productImage;
@@ -25,6 +25,8 @@ public class Product implements Serializable {
         this.sellerEmail=sellerEmail;
         this.sellerMobile=sellerMobile;
         this.productDate = Calendar.getInstance().getTime();
+        this.sellerLatitude = sellerLatitude;
+        this.sellerLongitude = sellerLongitude;
     }
 
     public Date getProductDate() {
@@ -36,13 +38,31 @@ public class Product implements Serializable {
     }
 
     public Product(String userId, String productTitle, String productImage, String productPrice, String productStock
-            , String productDescription){
+            , String productDescription, String sellerLatitude, String sellerLongitude){
         this.userId = userId;
         this.productTitle = productTitle;
         this.productImage = productImage;
         this.productPrice = productPrice;
         this.productStock = productStock;
         this.productDescription = productDescription;
+        this.sellerLatitude = sellerLatitude;
+        this.sellerLongitude = sellerLongitude;
+    }
+
+    public String getSellerLatitude() {
+        return sellerLatitude;
+    }
+
+    public void setSellerLatitude(String sellerLatitude) {
+        this.sellerLatitude = sellerLatitude;
+    }
+
+    public String getSellerLongitude() {
+        return sellerLongitude;
+    }
+
+    public void setSellerLongitude(String sellerLongitude) {
+        this.sellerLongitude = sellerLongitude;
     }
 
     public Product(){}

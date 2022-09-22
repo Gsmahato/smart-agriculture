@@ -2,12 +2,25 @@ package com.hanuman.smartagriculture;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -34,12 +47,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.hanuman.smartagriculture.dashboard.DashboardActivity;
 import com.hanuman.smartagriculture.models.Users;
 import com.hanuman.smartagriculture.databinding.ActivityLoginBinding;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+
 import es.dmoral.toasty.Toasty;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LocationListener{
     ActivityLoginBinding binding;
     ProgressDialog progressDialog;
     private FirebaseAuth auth;
@@ -49,16 +68,27 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "FacebookAuthentication";
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
-
+    private LocationManager locationManager;
+    double latitude,longitude;
+    String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityLoginBinding.inflate(getLayoutInflater());
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         //for skip button
         skipButtonOnClick();
+
+
+        //Run time permission
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(LoginActivity.this,new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            },100);
+        }
 
         //progress dialog codes
         progressDialog = new ProgressDialog(LoginActivity.this);
@@ -71,15 +101,15 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-        mCallbackManager= CallbackManager.Factory.create();
+        mCallbackManager = CallbackManager.Factory.create();
         binding.btnFb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this,Arrays.asList("email","public_profile"));
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
                 LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Log.d(TAG, "onSuccess"+loginResult);
+                        Log.d(TAG, "onSuccess" + loginResult);
                         progressDialog.show();
                         handleFacebookToken(loginResult.getAccessToken());
                     }
@@ -98,15 +128,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if (currentAccessToken==null){
+                if (currentAccessToken == null) {
                     auth.signOut();
                 }
             }
         };
-
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -124,15 +154,26 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
+    public void getLocation(){
+        try {
+            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5,LoginActivity.this);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     private void handleFacebookToken(AccessToken token) {
-        Log.d(TAG, "handleAccessToken"+token);
-        AuthCredential credential= FacebookAuthProvider.getCredential(token.getToken());
+        Log.d(TAG, "handleAccessToken" + token);
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         auth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Log.d(TAG,"Signing with credential Successful");
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "Signing with credential Successful");
                     FirebaseUser user = auth.getCurrentUser();
                     Users users = new Users();
                     users.setUserId(Objects.requireNonNull(user).getUid());
@@ -142,11 +183,10 @@ public class LoginActivity extends AppCompatActivity {
                     updateUi();
                     progressDialog.dismiss();
 
-                }
-                else{
-                    Log.d(TAG,"Signing with credential failure"+task.getException());
-                    Toasty.error(LoginActivity.this, "Authentication Failed !", Toasty.LENGTH_SHORT,true).show();
-
+                } else {
+                    Log.d(TAG, "Signing with credential failure" + task.getException());
+                    Toasty.error(LoginActivity.this, "Authentication Failed !", Toasty.LENGTH_SHORT, true).show();
+                    progressDialog.dismiss();
                 }
             }
         });
@@ -196,35 +236,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithCredential:success");
-                            FirebaseUser user = auth.getCurrentUser();
-                            Users users = new Users();
-                            users.setUserId(user.getUid());
-                            users.setUserName(user.getDisplayName());
-                            users.setProfilePic(user.getPhotoUrl().toString());
-                            database.getReference().child("Users").child(user.getUid()).setValue(users);
-                            updateUi();
-                            Toasty.success(LoginActivity.this, "Google Signing Successfully", Toasty.LENGTH_SHORT,true).show();
-                            progressDialog.dismiss();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication Failed !", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-    }
-
-    
     private void skipButtonOnClick(){
         binding.btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,4 +261,79 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.dismiss();
         super.onBackPressed();
     }
-}
+
+
+    @Override
+    public void onLocationChanged(@NonNull android.location.Location location) {
+        try {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+//            Geocoder geocoder = new Geocoder(LoginActivity.this, Locale.getDefault());
+//            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+//            String address = addresses.get(0).getAddressLine(0);
+            binding.btnSkip.setText(String.valueOf(latitude) + String.valueOf(longitude));
+            progressDialog.dismiss();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+        LocationListener.super.onProviderEnabled(provider);
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+        LocationListener.super.onProviderDisabled(provider);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 100:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("gps", "Location permission granted");
+                    try {
+                        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        locationManager.requestLocationUpdates("gps", 0, 0, this);
+                    } catch (SecurityException ex) {
+                        Log.d("gps", "Location permission did not work!");
+                    }
+                }
+                break;
+        }
+    }
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful() ) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "signInWithCredential:success");
+                            FirebaseUser user = auth.getCurrentUser();
+                            Users users = new Users();
+                            users.setUserId(user.getUid());
+                            users.setUserName(user.getDisplayName());
+                            users.setProfilePic(user.getPhotoUrl().toString());
+                            getLocation();
+                            users.setLatitude(String.valueOf(latitude));
+                            users.setLongitude(String.valueOf(longitude));
+                            database.getReference().child("Users").child(user.getUid()).setValue(users);
+                            updateUi();
+                            Toasty.success(LoginActivity.this, "Google Signing Successfully", Toasty.LENGTH_SHORT,true).show();
+                            progressDialog.dismiss();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "signInWithCredential:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication Failed !", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                });
+    }
+    }

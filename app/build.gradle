@@ -1,17 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
 
     defaultConfig {
         applicationId "com.hanuman.smartagriculture"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0.0"
         multiDexEnabled true
@@ -54,6 +55,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
     implementation 'com.google.firebase:firebase-firestore:24.2.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     testImplementation 'junit:junit:'
     testImplementation 'org.testng:testng:6.9.6'
     testImplementation 'junit:junit:4.12'
@@ -77,5 +79,7 @@ dependencies {
     implementation 'com.hbb20:ccp:2.5.0'
     implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
     implementation 'com.ldoublem.loadingview:loadingviewlib:1.0'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8+'
+
 
 }

@@ -14,28 +14,26 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.NotNull;
 import com.hanuman.smartagriculture.R;
 import com.hanuman.smartagriculture.adapters.ProductDetailsHomeAdapter;
+import com.hanuman.smartagriculture.models.Location;
 import com.hanuman.smartagriculture.models.Product;
 import com.hanuman.smartagriculture.services.products.CrudProduct;
 import com.hanuman.smartagriculture.services.products.ProductDetailsActivity;
-
 import com.hanuman.smartagriculture.databinding.FragmentHomeBinding;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
 
 public class HomeFragment extends Fragment {
 
@@ -48,11 +46,14 @@ public class HomeFragment extends Fragment {
     int totalItem, currentItem, scrollOutItem;
     private ArrayList<Product> list = new ArrayList<>();
     private ProductDetailsHomeAdapter.RecyclerViewClickListener listener;
+    FirebaseDatabase database;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -100,6 +101,8 @@ public class HomeFragment extends Fragment {
         binding.swipCircle.startAnim();
         binding.swipCircle.setViewColor(ContextCompat.getColor(getContext(), R.color.dark_grey));
         binding.swipCircle.setBarColor(ContextCompat.getColor(getContext(), R.color.light_white_back));
+
+
 
         binding.recyclerViewProductDetails.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -186,6 +189,8 @@ public class HomeFragment extends Fragment {
             intent.putExtra("SellerMobile", product.getSellerMobile());
             intent.putExtra("TotalProductStock", product.getProductStock());
             intent.putExtra("ProductKey", product.getKey());
+            intent.putExtra("Latitude", product.getSellerLatitude());
+            intent.putExtra("Longitude", product.getSellerLongitude());
             getContext().startActivity(intent);
         };
     }

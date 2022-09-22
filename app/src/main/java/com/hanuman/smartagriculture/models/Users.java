@@ -1,15 +1,42 @@
 package com.hanuman.smartagriculture.models;
 
 public class Users {
-    String userId, profilePic,userName,email;
+    String userId, profilePic,userName,email, address, latitude, longitude;
 
-    public Users(String userId, String profilePic, String userName, String email) {
+    public Users(String userId, String profilePic, String userName, String email, String longitude,String latitude, String address) {
         this.userId = userId;
         this.profilePic = profilePic;
         this.userName = userName;
         this.email = email;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
     public Users(){}
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getUserId() {
         return userId;
