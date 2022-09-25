@@ -1,9 +1,12 @@
 package com.hanuman.smartagriculture;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -36,7 +40,9 @@ import com.hanuman.smartagriculture.descriptions.help.HelpActivity;
 import com.hanuman.smartagriculture.hyperlink.DailyVegMarketActivity;
 import com.hanuman.smartagriculture.services.news.NewsActivity;
 import com.hanuman.smartagriculture.databinding.ActivityMainBinding;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AccessTokenTracker accessTokenTracker;
     Dialog dialog;
     GoogleSignInClient mGoogleSignInClient;
+    LocationService locationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if(Build.VERSION.SDK_INT >=23){
+            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                //request location again
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                }, 100);            }
+            else{
+                //ask the user for the permission
+                startService();
+
+            }
+        }
+        else {
+            startService();
+        }
+
+
 
         //google signIn request
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -82,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-//for drawer layout
+        //for drawer layout
         toggle = new ActionBarDrawerToggle(this, binding.drawerLayout,R.string.start,R.string.close);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         binding.navigationView.setNavigationItemSelectedListener(this);
@@ -99,6 +124,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
+    }
+
+    void startService() {
+        Intent intent = new Intent(MainActivity.this, LocationService.class);
+        startService(intent);
     }
 
 
@@ -200,6 +230,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
+
+
+
+
 
 
 }

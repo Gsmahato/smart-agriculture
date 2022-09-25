@@ -15,6 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hanuman.smartagriculture.LoginActivity;
 import com.hanuman.smartagriculture.MainActivity;
@@ -32,6 +38,7 @@ public class DashboardActivity extends AppCompatActivity {
     FirebaseAuth auth;
     ActivityDashboardBinding binding;
     Dialog dialog;
+    GoogleSignInClient mGoogleSignInClient;
 
 
     @Override
@@ -39,6 +46,11 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(DashboardActivity.this,gso);
 
         //get instance
         auth = FirebaseAuth.getInstance();
@@ -83,11 +95,19 @@ public class DashboardActivity extends AppCompatActivity {
             Button noBtn = dialog.findViewById(R.id.btn_no_confirm);
             dialog.show();
             yesBtn.setOnClickListener(view -> {
-                Toasty.success(DashboardActivity.this, "Successfully Logout the admin account.", Toasty.LENGTH_SHORT,true).show();
                 Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
                 auth.signOut();
+                LoginManager.getInstance().logOut();
+                mGoogleSignInClient.signOut()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toasty.success(DashboardActivity.this, "Successfully logout the account", Toasty.LENGTH_SHORT,true).show();
+                            }
+                        });
+                Toasty.success(DashboardActivity.this, "Successfully logout the account", Toasty.LENGTH_SHORT,true).show();
             });
             noBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

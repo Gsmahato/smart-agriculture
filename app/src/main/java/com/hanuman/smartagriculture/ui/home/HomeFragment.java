@@ -33,6 +33,7 @@ import com.hanuman.smartagriculture.services.products.CrudProduct;
 import com.hanuman.smartagriculture.services.products.ProductDetailsActivity;
 import com.hanuman.smartagriculture.databinding.FragmentHomeBinding;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
@@ -143,7 +144,7 @@ public class HomeFragment extends Fragment {
                     Product product1 = data.getValue(Product.class);
                     product1.setKey(data.getKey());
                     String[] product_stock_array =  product1.getProductStock().split(" ");
-                    int product_stock = Integer.parseInt(product_stock_array[0]);
+                    double product_stock = Double.parseDouble(product_stock_array[0]);
                     if(product_stock>0) {
                         product.add(product1);
                     }
@@ -194,4 +195,6 @@ public class HomeFragment extends Fragment {
             getContext().startActivity(intent);
         };
     }
+
+
 }

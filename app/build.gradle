@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
     implementation 'com.google.firebase:firebase-firestore:24.3.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
     testImplementation 'junit:junit:'
     testImplementation 'org.testng:testng:6.9.6'
     testImplementation 'junit:junit:4.13.2'

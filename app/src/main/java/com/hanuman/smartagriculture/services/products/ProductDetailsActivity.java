@@ -39,6 +39,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     CrudProduct crudProduct;
     double doubleLatitude;
     double doubleLongitude;
+    String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         binding.mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:"+latitude+","+longitude+"?="+Uri.parse(latitude+","+longitude));
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(mapIntent);
-                }
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<" + doubleLatitude  + ">,<" + doubleLongitude + ">?q=<" + doubleLatitude  + ">,<" + doubleLongitude + ">(" + address + ")"));
+                startActivity(intent);
                 Toasty.success(ProductDetailsActivity.this, "Going to Google Map", Toasty.LENGTH_SHORT, true).show();
             }
         });
@@ -170,9 +167,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String address = addresses.get(0).getAddressLine(0);
+            address = addresses.get(0).getAddressLine(0);
             binding.sellerLocationTextView.setText(address);
-
 
             //Setting Intent Data
             binding.productTitleDetails.setText(title);

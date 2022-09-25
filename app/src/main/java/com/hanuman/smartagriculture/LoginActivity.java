@@ -8,15 +8,19 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -35,7 +39,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -43,22 +51,35 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 import com.hanuman.smartagriculture.dashboard.DashboardActivity;
 import com.hanuman.smartagriculture.models.Users;
 import com.hanuman.smartagriculture.databinding.ActivityLoginBinding;
+import com.hanuman.smartagriculture.ui.account.CrudUser;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.DexterBuilder;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
 
-public class LoginActivity extends AppCompatActivity implements LocationListener{
+public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     ProgressDialog progressDialog;
     private FirebaseAuth auth;
@@ -69,8 +90,9 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
     private LocationManager locationManager;
-    double latitude,longitude;
-    String address;
+    boolean mBound = false;
+    double latitude, longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,25 +103,33 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
         //for skip button
         skipButtonOnClick();
 
+        //get instance
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
-        //Run time permission
-        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(LoginActivity.this,new String[]{
+        if(Build.VERSION.SDK_INT >=23){
+            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                //request location again
+                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
-            },100);
+            }, 100);            }
+            else{
+                //ask the user for the permission
+                startService();
+            }
         }
+        else {
+            startService();
+        }
+
 
         //progress dialog codes
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setTitle("Please Wait");
         progressDialog.setMessage("Logging to your account ");
 
-        //get instance
-        auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
 
         mCallbackManager = CallbackManager.Factory.create();
         binding.btnFb.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +177,7 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
 
+        //google login button
         binding.btnGoogle.setOnClickListener(view -> {
             progressDialog.show();
             signIn();
@@ -154,15 +185,13 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
 
     }
 
-    @SuppressLint("MissingPermission")
-    public void getLocation(){
-        try {
-            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5,LoginActivity.this);
+    private final String[] background_location_permission = {
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+    };
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    void startService(){
+        Intent intent = new Intent(LoginActivity.this, LocationService.class);
+        startService(intent);
     }
 
 
@@ -179,6 +208,8 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                     users.setUserId(Objects.requireNonNull(user).getUid());
                     users.setUserName(user.getDisplayName());
                     users.setProfilePic(user.getPhotoUrl().toString());
+                    users.setLatitude(String.valueOf(latitude));
+                    users.setLongitude(String.valueOf(longitude));
                     database.getReference().child("Users").child(user.getUid()).setValue(users);
                     updateUi();
                     progressDialog.dismiss();
@@ -198,6 +229,8 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
 //        auth.addAuthStateListener(authStateListener);
+        Intent intent = new Intent(this, LocationService.class);
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
     }
 
@@ -207,6 +240,8 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
         if (authStateListener!=null){
             auth.removeAuthStateListener(authStateListener);
         }
+        unbindService(connection);
+        mBound = false;
     }
 
     int RC_SIGN_IN = 65;
@@ -229,6 +264,7 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d("signing", "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("signing", "Google sign in failed", e);
@@ -262,32 +298,24 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
         super.onBackPressed();
     }
 
-
-    @Override
-    public void onLocationChanged(@NonNull android.location.Location location) {
-        try {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-//            Geocoder geocoder = new Geocoder(LoginActivity.this, Locale.getDefault());
-//            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-//            String address = addresses.get(0).getAddressLine(0);
-            binding.btnSkip.setText(String.valueOf(latitude) + String.valueOf(longitude));
-            progressDialog.dismiss();
-
-        }catch (Exception e){
-            e.printStackTrace();
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LocationService.MyBinder binder = (LocationService.MyBinder) service;
+            longitude = binder.getService().longitude;
+            latitude = binder.getService().latitude;
+            mBound = true;
         }
-    }
 
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-        LocationListener.super.onProviderEnabled(provider);
-    }
 
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-        LocationListener.super.onProviderDisabled(provider);
-    }
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -298,7 +326,7 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                     Log.d("gps", "Location permission granted");
                     try {
                         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                        locationManager.requestLocationUpdates("gps", 0, 0, this);
+                        locationManager.requestLocationUpdates("gps", 0, 0, (LocationListener) this);
                     } catch (SecurityException ex) {
                         Log.d("gps", "Location permission did not work!");
                     }
@@ -320,7 +348,6 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                             users.setUserId(user.getUid());
                             users.setUserName(user.getDisplayName());
                             users.setProfilePic(user.getPhotoUrl().toString());
-                            getLocation();
                             users.setLatitude(String.valueOf(latitude));
                             users.setLongitude(String.valueOf(longitude));
                             database.getReference().child("Users").child(user.getUid()).setValue(users);
@@ -336,4 +363,6 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                     }
                 });
     }
-    }
+
+
+}
