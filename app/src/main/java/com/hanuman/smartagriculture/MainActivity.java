@@ -22,6 +22,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +35,6 @@ import com.hanuman.smartagriculture.descriptions.AboutActivity;
 import com.hanuman.smartagriculture.descriptions.help.HelpActivity;
 import com.hanuman.smartagriculture.hyperlink.DailyVegMarketActivity;
 import com.hanuman.smartagriculture.services.news.NewsActivity;
-import com.hanuman.smartagriculture.LoginActivity;
 import com.hanuman.smartagriculture.databinding.ActivityMainBinding;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessTokenTracker accessTokenTracker;
     Dialog dialog;
+    GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //google signIn request
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
         //dialog for confirmation
         dialog= new Dialog(this);
         ActionBar actionBar;
@@ -137,6 +148,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(View view) {
                         auth.signOut();
                         LoginManager.getInstance().logOut();
+                        mGoogleSignInClient.signOut()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(MainActivity.this, "Successfully logout the account", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                         Toast.makeText(MainActivity.this, "Successfully Logout the account.", Toast.LENGTH_SHORT).show();
                         Intent intent2 = new Intent(MainActivity.this,LoginActivity.class);
                         startActivity(intent2);

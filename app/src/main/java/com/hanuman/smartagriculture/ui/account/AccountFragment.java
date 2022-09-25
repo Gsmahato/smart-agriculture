@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.facebook.BuildConfig;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.hanuman.smartagriculture.LoginActivity;
@@ -25,7 +32,6 @@ import com.hanuman.smartagriculture.R;
 import com.hanuman.smartagriculture.descriptions.AboutActivity;
 import com.hanuman.smartagriculture.descriptions.PrivacyPolicyActivity;
 import com.hanuman.smartagriculture.services.order.OrderList;
-import com.hanuman.smartagriculture.BuildConfig;
 import com.hanuman.smartagriculture.databinding.FragmentAccountBinding;
 import java.util.Objects;
 import es.dmoral.toasty.Toasty;
@@ -35,6 +41,16 @@ public class AccountFragment extends Fragment {
     FirebaseAuth auth;
     Dialog dialog;
     public Context context;
+    GoogleSignInClient mGoogleSignInClient;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getContext(),gso);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,6 +111,13 @@ public class AccountFragment extends Fragment {
             yesBtn.setOnClickListener(view1 -> {
                 auth.signOut();
                 LoginManager.getInstance().logOut();
+                mGoogleSignInClient.signOut()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getActivity(), "Successfully logout the account", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 Toasty.success(getActivity(), "Successfully Logout the account.", Toast.LENGTH_SHORT,true).show();
                 Intent intent2 = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent2);

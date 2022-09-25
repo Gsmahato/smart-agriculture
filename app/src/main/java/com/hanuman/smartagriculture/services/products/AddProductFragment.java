@@ -200,24 +200,11 @@ public class AddProductFragment extends Fragment {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-
-    // checking camera permissions
-    private Boolean checkCameraPermission() {
-        boolean result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
-    }
-
-    // Requesting camera permission
-    private void requestCameraPermission() {
-        requestPermissions(cameraPermission, CAMERA_CAPTURE);
-    }
-
     // Requesting camera and gallery // permission if not given
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case CAMERA_CAPTURE: {
+            case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE: {
                 if (grantResults.length > 0) {
                     boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean writeStorageaccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
@@ -246,7 +233,7 @@ public class AddProductFragment extends Fragment {
 
     // Here we will pick image from gallery or camera
     private void pickFromGallery() {
-        CropImage.activity().start(getActivity());
+        CropImage.activity().start(getContext(), this);
     }
 
     @Override
@@ -256,15 +243,27 @@ public class AddProductFragment extends Fragment {
             mImageUri = data.getData();
             Glide.with(this).load(mImageUri).into(binding.productImgShow);
         }
-        else{
+        else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri mImageUri = result.getUri();
+            if (resultCode == RESULT_OK && data !=null) {
+                mImageUri = result.getUri();
                 Glide.with(this).load(mImageUri).into(binding.productImgShow);
             }
         }
-
-
+        else if (requestCode == CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK && data !=null) {
+                mImageUri = result.getUri();
+                Glide.with(this).load(mImageUri).into(binding.productImgShow);
+            }
+        }
+        else if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK && data !=null) {
+                mImageUri = result.getUri();
+                Glide.with(this).load(mImageUri).into(binding.productImgShow);
+            }
+        }
     }
 
     public void uploadProduct() {
