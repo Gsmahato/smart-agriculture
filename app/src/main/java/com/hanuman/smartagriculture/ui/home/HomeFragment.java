@@ -1,5 +1,6 @@
 package com.hanuman.smartagriculture.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,10 +26,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.NotNull;
@@ -36,6 +39,7 @@ import com.hanuman.smartagriculture.R;
 import com.hanuman.smartagriculture.adapters.ProductDetailsHomeAdapter;
 import com.hanuman.smartagriculture.models.Location;
 import com.hanuman.smartagriculture.models.Product;
+import com.hanuman.smartagriculture.models.Users;
 import com.hanuman.smartagriculture.services.products.CrudProduct;
 import com.hanuman.smartagriculture.services.products.ProductDetailsActivity;
 import com.hanuman.smartagriculture.databinding.FragmentHomeBinding;
@@ -43,7 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private FragmentHomeBinding binding;
     ProductDetailsHomeAdapter adapter;
@@ -56,58 +60,13 @@ public class HomeFragment extends Fragment {
     private ProductDetailsHomeAdapter.RecyclerViewClickListener listener;
     FirebaseDatabase database;
     BottomSheetDialog bottomSheetDialog;
+    double lat1, lat2, long1, long2;
+    Product product;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
-        inflater.inflate(R.menu.filter, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                adapter.getFilter().filter(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
-                return false;
-            }
-        });
-
-        MenuItem filter = menu.findItem(R.id.filter);
-        filter.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                bottomSheetDialog = new BottomSheetDialog(getContext());
-                View contentView = View.inflate(getActivity(), R.layout.bottomsheet, null);
-                bottomSheetDialog.setContentView(contentView);
-                bottomSheetDialog.show();
-                EditText text = bottomSheetDialog.findViewById(R.id.distanceEditText);
-                String distance = text.getText().toString().trim();
-                Button setBtn = bottomSheetDialog.findViewById(R.id.distanceSetBtn);
-                setBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        double doubleDistance = Double.parseDouble(distance);
-                        Toast.makeText(getContext(), "hello guru ji" +
-                                "", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                return false;
-            }
-        });
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -126,6 +85,7 @@ public class HomeFragment extends Fragment {
 
         //get instance
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         crud = new CrudProduct();
         loadData();
@@ -163,6 +123,79 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        inflater.inflate(R.menu.filter, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
+        MenuItem filter = menu.findItem(R.id.filter);
+        filter.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                bottomSheetDialog = new BottomSheetDialog(getContext());
+                View contentView = View.inflate(getActivity(), R.layout.bottomsheet, null);
+                bottomSheetDialog.setContentView(contentView);
+                bottomSheetDialog.show();
+                EditText text = bottomSheetDialog.findViewById(R.id.distanceEditText);
+                Button setBtn = bottomSheetDialog.findViewById(R.id.distanceSetBtn);
+                setBtn.setOnClickListener(v -> {
+                    database.getReference("Users").child(auth.getCurrentUser().getUid())
+                            .get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            String distance = text.getText().toString().trim();
+                            Users user = dataSnapshot.getValue(Users.class);
+                            if(user!=null) {
+                                lat1 = Double.parseDouble(user.getLatitude());
+                                long1 = Double.parseDouble(user.getLongitude());
+                                crud.get(key).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                        ArrayList<Product> product = new ArrayList<>();
+                                        for (DataSnapshot data : snapshot.getChildren()) {
+                                            Product product1 = data.getValue(Product.class);
+                                            product1.setKey(data.getKey());
+                                            lat2 = Double.parseDouble(product1.getSellerLatitude());
+                                            long2 = Double.parseDouble(product1.getSellerLongitude());
+                                            product.add(product1);
+                                            key = data.getKey();
+                                        }
+                                        double disDiff = distanceCalculate(lat1, long1, lat2, long2);
+                                        Toast.makeText(getContext(), ""+disDiff, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                        Log.d("HomeFragment", error.getMessage() + "");
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    bottomSheetDialog.dismiss();
+                });
+                return true;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
     private void loadData() {
         binding.swipCircle.startAnim();
         crud.get(key).addValueEventListener(new ValueEventListener() {
@@ -174,6 +207,8 @@ public class HomeFragment extends Fragment {
                     product1.setKey(data.getKey());
                     String[] product_stock_array =  product1.getProductStock().split(" ");
                     double product_stock = Double.parseDouble(product_stock_array[0]);
+                    lat2 = Double.parseDouble(product1.getSellerLatitude());
+                    long2 = Double.parseDouble(product1.getSellerLongitude());
                     if(product_stock>0) {
                         product.add(product1);
                     }
@@ -208,7 +243,7 @@ public class HomeFragment extends Fragment {
 
     private void setOnClickListener() {
         listener = (view, position) -> {
-            Product product = list.get(position);
+            product = list.get(position);
             Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
             intent.putExtra("TitleProductText", product.getProductTitle());
             intent.putExtra("ProductPriceText", product.getProductPrice());

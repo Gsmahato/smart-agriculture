@@ -25,6 +25,8 @@ import com.hanuman.smartagriculture.adapters.OrderAdapter;
 import com.hanuman.smartagriculture.models.Order;
 import com.hanuman.smartagriculture.databinding.FragmentPendingOrderListBinding;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import es.dmoral.toasty.Toasty;
 
 public class PendingOrderListFragment extends Fragment {
@@ -90,7 +92,7 @@ public class PendingOrderListFragment extends Fragment {
                     ArrayList<Order> order = new ArrayList<>();
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Order order1 = data.getValue(Order.class);
-                        if (order1.getBuyerEmail().equals(auth.getCurrentUser().getEmail()) && !order1.isCompleted()) {
+                        if (Objects.equals(auth.getCurrentUser().getEmail(), order1.getBuyerEmail()) && !order1.isCompleted()) {
                             order1.setKey(data.getKey());
                             order.add(order1);
                             key = data.getKey();

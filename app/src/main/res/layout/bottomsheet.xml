@@ -15,9 +15,10 @@
         android:fontFamily="@font/cuprum_bold"
         android:gravity="center"
         android:hint="@string/max_location"
+        android:inputType="numberDecimal"
         android:minHeight="48dp"
         android:padding="10dp"
-        android:inputType="numberDecimal"
+        android:textColor="#453F3F"
         android:textColorHint="@color/dark_grey" />
 
     <Button

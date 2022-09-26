@@ -39,8 +39,8 @@ public class LocationService extends Service {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                latitude = locationResult.getLocations().get(0).getLatitude();
-                longitude = locationResult.getLocations().get(0).getLongitude();
+                latitude = locationResult.getLastLocation().getLatitude();
+                longitude = locationResult.getLastLocation().getLongitude();
             }
         };
     }

@@ -88,6 +88,8 @@ public class ProductDetailsHomeAdapter  extends RecyclerView.Adapter<RecyclerVie
             list.addAll((ArrayList<Product>)results.values);
             notifyDataSetChanged();
         }
+
+
     };
 
     public class ProductDetailsVH  extends RecyclerView.ViewHolder implements View.OnClickListener {

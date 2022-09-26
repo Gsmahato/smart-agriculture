@@ -33,8 +33,8 @@ public class CrudSale {
 
     public Query get(String key){
         if(key==null){
-            return databaseReference.orderByKey().limitToFirst(8);
+            return databaseReference.orderByKey().limitToFirst(30);
         }
-        return databaseReference.orderByKey().startAfter(key).limitToFirst(8);
+        return databaseReference.orderByKey().startAfter(key).limitToFirst(30);
     }
 }
