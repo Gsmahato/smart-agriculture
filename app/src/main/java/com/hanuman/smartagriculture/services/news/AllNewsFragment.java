@@ -35,7 +35,6 @@ public class AllNewsFragment extends Fragment {
     private final ArrayList<News> list = new ArrayList<>();
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

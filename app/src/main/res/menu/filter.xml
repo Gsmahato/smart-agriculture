@@ -6,4 +6,11 @@
     android:title="Search Product"
     app:showAsAction="always"
     app:actionViewClass="android.widget.SearchView" />
+
+    <item android:id="@+id/filter"
+        android:icon="@drawable/ic_filter2"
+        android:title="Filter Product"
+        app:showAsAction="always"
+        />
+
 </menu>

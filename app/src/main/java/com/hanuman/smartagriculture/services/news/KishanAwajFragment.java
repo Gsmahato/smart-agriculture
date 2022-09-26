@@ -67,8 +67,6 @@ public class KishanAwajFragment extends Fragment {
        }
    }
         );
-
-
         return root;
     }
 

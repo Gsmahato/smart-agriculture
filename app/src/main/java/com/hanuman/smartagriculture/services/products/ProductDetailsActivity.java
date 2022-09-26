@@ -89,8 +89,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             crud = new CrudOrder();
                             try {
                                 String[] product_stock_array =  totalProductStock.split(" ");
-                                int product_stock = Integer.parseInt(product_stock_array[0]);
-                                int final_stock = product_stock-orderStock;
+                                double product_stock = Double.parseDouble(product_stock_array[0]);
+                                double final_stock = product_stock-orderStock;
                                 if(product_stock>=orderStock && product_stock > 0) {
                                     crud.add(order).addOnSuccessListener(unused -> {
                                         yourStock.setText("");

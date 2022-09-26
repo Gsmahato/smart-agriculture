@@ -160,4 +160,9 @@ Note: Normal users can easily transfer to Farmer users anytime they want.\n
         2. After login, You have to feature like requesting an order inside the product description\n
     </string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="filter">Filter</string>
+    <string name="max_location">Max location in KM</string>
+    <string name="choose_photo">फोटो छान्नुहोस्</string>
+    <string name="take_photo">फोटो खिच्नुहोस्</string>
+    <string name="add_product2">ADD PRODUCT(समान राख्नुहोस्)</string>
 </resources>

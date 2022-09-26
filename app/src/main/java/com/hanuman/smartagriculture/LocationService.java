@@ -16,6 +16,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.hanuman.smartagriculture.models.Location;
 
 public class LocationService extends Service {
     FusedLocationProviderClient fusedLocationProviderClient;

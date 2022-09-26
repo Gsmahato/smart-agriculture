@@ -120,7 +120,7 @@
                 android:layout_weight="0.4"
                 android:background="@drawable/customborder"
                 android:outlineAmbientShadowColor="@color/darkGreen"
-                android:text="CHOOSE IMAGE"
+                android:text="@string/choose_photo"
                 android:textColor="@color/white" />
 
             <Button
@@ -133,7 +133,7 @@
                 android:layout_weight="0.4"
                 android:background="@drawable/customborder"
                 android:drawableRight="@drawable/ic_camera"
-                android:text="Take Photo"
+                android:text="@string/take_photo"
                 android:textColor="#F4F4F4" />
 
         </LinearLayout>
@@ -179,8 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/cuprum_bold"
-            android:text="ADD PRODUCT"
+            android:text="@string/add_product2"
             android:textColor="@color/white"
             android:textSize="24sp" />
 

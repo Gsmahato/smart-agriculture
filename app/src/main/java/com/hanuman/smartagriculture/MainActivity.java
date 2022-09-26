@@ -12,8 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.arthurivanets.bottomsheets.BottomSheet;
+import com.arthurivanets.bottomsheets.config.Config;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.login.LoginManager;
@@ -31,15 +35,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.datepicker.MaterialTextInputPicker;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hanuman.smartagriculture.descriptions.AboutActivity;
 import com.hanuman.smartagriculture.descriptions.help.HelpActivity;
 import com.hanuman.smartagriculture.hyperlink.DailyVegMarketActivity;
+import com.hanuman.smartagriculture.models.Users;
 import com.hanuman.smartagriculture.services.news.NewsActivity;
 import com.hanuman.smartagriculture.databinding.ActivityMainBinding;
+import com.hanuman.smartagriculture.ui.home.HomeFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AccessTokenTracker accessTokenTracker;
     Dialog dialog;
     GoogleSignInClient mGoogleSignInClient;
-    LocationService locationService;
+    BottomSheetDialog bottomSheetDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             startService();
         }
-
-
 
         //google signIn request
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -228,10 +237,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);
         }
+
         return false;
     }
-
-
 
 
 

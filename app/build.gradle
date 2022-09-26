@@ -80,6 +80,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
     implementation 'com.ldoublem.loadingview:loadingviewlib:1.0'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8+'
+    implementation "com.arthurivanets.bottomsheet:bottomsheets-core:1.0.0"
+
 
 
 

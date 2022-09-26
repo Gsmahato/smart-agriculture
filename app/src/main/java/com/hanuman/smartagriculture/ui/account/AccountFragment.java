@@ -1,5 +1,6 @@
 package com.hanuman.smartagriculture.ui.account;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -52,6 +53,7 @@ public class AccountFragment extends Fragment {
         mGoogleSignInClient = GoogleSignIn.getClient(getContext(),gso);
     }
 
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAccountBinding.inflate(inflater,container,false);
@@ -65,7 +67,7 @@ public class AccountFragment extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
         //Setting Version name
         String versionName = BuildConfig.VERSION_NAME;
-        binding.appVersionTextView.setText("Version : " + versionName);
+        binding.appVersionTextView.setText("Version : " + "1.0.0");
 
         if(user!=null){
             String personImage = user.getPhotoUrl().toString()+"?height=500";

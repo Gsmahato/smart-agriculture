@@ -135,6 +135,13 @@
         <entry key="..\:/Smart-Agriculture/app/src/main/res/menu/task.xml" value="0.25677083333333334" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.261" />
         <entry key="..\:/Smart-Agriculture/app/src/main/res/xml/provider_paths.xml" value="0.24010416666666667" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/drawable/ic_filter2.xml" value="0.1" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/layout/activity_main.xml" value="0.25677083333333334" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/layout/bottomsheet.xml" value="0.2557291666666667" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/layout/fragment_add_product.xml" value="0.225" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/menu/filter.xml" value="0.1" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/menu/filter2.xml" value="0.21927083333333333" />
+        <entry key="..\:/smart-agriculture/app/src/main/res/menu/help_menu.xml" value="0.25677083333333334" />
       </map>
     </option>
   </component>

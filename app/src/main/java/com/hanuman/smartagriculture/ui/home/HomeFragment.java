@@ -10,15 +10,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.utils.widget.ImageFilterView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,7 +55,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Product> list = new ArrayList<>();
     private ProductDetailsHomeAdapter.RecyclerViewClickListener listener;
     FirebaseDatabase database;
-
+    BottomSheetDialog bottomSheetDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +68,8 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
         inflater.inflate(R.menu.filter, menu);
-        MenuItem item = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) item.getActionView();
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -76,6 +83,30 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
+
+        MenuItem filter = menu.findItem(R.id.filter);
+        filter.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                bottomSheetDialog = new BottomSheetDialog(getContext());
+                View contentView = View.inflate(getActivity(), R.layout.bottomsheet, null);
+                bottomSheetDialog.setContentView(contentView);
+                bottomSheetDialog.show();
+                EditText text = bottomSheetDialog.findViewById(R.id.distanceEditText);
+                String distance = text.getText().toString().trim();
+                Button setBtn = bottomSheetDialog.findViewById(R.id.distanceSetBtn);
+                setBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        double doubleDistance = Double.parseDouble(distance);
+                        Toast.makeText(getContext(), "hello guru ji" +
+                                "", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return false;
+            }
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -102,8 +133,6 @@ public class HomeFragment extends Fragment {
         binding.swipCircle.startAnim();
         binding.swipCircle.setViewColor(ContextCompat.getColor(getContext(), R.color.dark_grey));
         binding.swipCircle.setBarColor(ContextCompat.getColor(getContext(), R.color.light_white_back));
-
-
 
         binding.recyclerViewProductDetails.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -196,5 +225,20 @@ public class HomeFragment extends Fragment {
         };
     }
 
+    public static double distanceCalculate(double lat1, double lon1, double lat2, double lon2) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        }
+        else {
+            double theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) +
+                    Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344;
 
+            return (dist);
+        }
+    }
 }
